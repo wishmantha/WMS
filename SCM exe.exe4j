@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="4.6" transformSequenceNumber="1">
+  <directoryPresets config="C:/Users/Anuradha/Documents/NetBeansProjects/WMS/src/images" />
+  <application name="WMS" distributionSourceDir="C:/Users/Anuradha/Documents">
+    <languages>
+      <principalLanguage id="en" customLocalizationFile="" />
+    </languages>
+  </application>
+  <executable name="Warehouse Management System" type="2" iconSet="true" iconFile="C:/Users/Anuradha/Documents/NetBeansProjects/WMS/src/images/scm icon 2.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="highestAvailable" checkConsoleParameter="false" globalSingleInstance="false" amd64="false">
+    <messageSet />
+    <versionInfo include="true" fileVersion="" fileDescription="Warehouse Management System" legalCopyright="" internalName="WMS" productName="" companyName="WISHMANTHA Software Solutions" productVersion="2.14.8.02" />
+  </executable>
+  <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="380" height="271" bitmapFile="C:/Users/Anuradha/Documents/NetBeansProjects/WMS/src/images/scm splash.png" java6SplashScreen="false">
+    <text>
+      <statusLine x="135" y="143" text="" font="Arial" fontSize="12" fontColor="0,0,0" fontWeight="500" />
+      <versionLine x="14" y="12" text="Version %VERSION%" font="Tahoma" fontSize="10" fontColor="0,102,102" fontWeight="400" />
+    </text>
+  </splashScreen>
+  <java mainClass="scm.theme" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="server" bundleRuntime="true" minVersion="1.6" maxVersion="" allowBetaVM="false" jdkOnly="false">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <classPath>
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/AbsoluteLayout.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/ant-1.7.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/antlr-2.7.5.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/barbecue-1.5-beta1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/barcode4j-2.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/bcel-5.2.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/bsh-2.0b4.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/commons-beanutils-1.8.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/commons-collections-2.1.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/commons-digester-1.7.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/commons-javaflow-20060411.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/commons-logging-1.0.4.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/groovy-all-1.7.5.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/hibernate3.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/hsqldb-1.8.0-10.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/iText-2.1.7.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jasperreports-4.0.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jasperreports-applet-4.0.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jaxen-1.1.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jcommon-1.0.15.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jdt-compiler-3.1.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jfreechart-1.0.12.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jpa.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jxl-2.6.10.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/log4j-1.2.15.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/mondrian-3.1.1.12687.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/mysql-connector-java-5.0.7-bin.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/png-encoder-1.5.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/poi-3.6.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/rhino-1.7R1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/saaj-api-1.3.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/serializer.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/servlet.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/spring-beans-2.5.5.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/spring-core-2.5.5.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/swing-layout-1.0.3.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/xml-apis.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/xml-apis-ext.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/xercesImpl-2.7.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/xalan-2.7.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/toplink-essentials.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/toplink-essentials-agent.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/DateChooser.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/dist/lib/jcalendar-1.3.3.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/mail.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/WMS/dist/WMS.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-configuration-1.10.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-configuration-1.10-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-collections4-4.0.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-collections4-4.0-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-lang3-3.3.2.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-lang3-3.3.2-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-logging-1.1.3.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-logging-1.1.3-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-lang-2.6.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-lang-2.6-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-collections-3.2.1.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-collections-3.2.1-javadoc.jar" failOnError="false" />
+      <archive location="./NetBeansProjects/Supply Chain Manangement/lib/commons-io-2.4.jar" failOnError="false" />
+    </classPath>
+    <nativeLibraryDirectories />
+  </java>
+  <includedFiles />
+  <unextractableFiles />
+</exe4j>
+
