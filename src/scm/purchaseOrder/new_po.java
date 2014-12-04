@@ -16,18 +16,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import scm.database.DBControl;
-import scm.utils.LabelColor;
 import scm.Main;
+import scm.database.DBControl;
 import scm.stock.stock_details;
+import scm.utils.LabelColor;
+import scm.utils.TimestampUtil;
 
 public final class new_po extends javax.swing.JInternalFrame {
 
     static DBControl db = new DBControl();
-    Date today = new Date();
-    long time = today.getTime();
-    Timestamp ts = new Timestamp(time);
-    String timestamp = ts.toString();
 
     public new_po() {
         try {
@@ -62,6 +59,7 @@ public final class new_po extends javax.swing.JInternalFrame {
             tblPO.getColumnModel().getColumn(4).setCellRenderer(dtcr);
             tblPO.getColumnModel().getColumn(5).setCellRenderer(dtcr);
             ////////////////////////////
+            Date today = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             sdf.format(today);
             txtPO_date.setDate(today);
@@ -1670,7 +1668,8 @@ private void txtStockCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
             db.setResult("INSERT INTO po VALUES ('" + po_no + "','" + po_date + "','" + supplier_no + "','" + project + "',"
                     + "'" + delTerm + "','" + del_date + "','" + payTerm + "','" + supRef + "','" + ourRef + "','" + POBy + "',"
-                    + "'" + attn + "','" + requestedBy + "','" + remarks + "','" + deliverTo + "','" + billTo + "','" + vatNo + "','" + vatType + "','" + currency + "','" + vat + "','" + total + "','" + updated_by + "','" + timestamp + "')");
+                    + "'" + attn + "','" + requestedBy + "','" + remarks + "','" + deliverTo + "','" + billTo + "','" + vatNo + "',"
+                    + "'" + vatType + "','" + currency + "','" + vat + "','" + total + "','" + updated_by + "','" + TimestampUtil.getTimestamp() + "')");
 
             bPDF.setEnabled(true);
             bPreview.setEnabled(true);
@@ -1770,6 +1769,7 @@ private void txtStockCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             txtSubTotal.setText("");
             txtTotal.setText("");
             txtDelivery_date.setDate(null);
+            Date today = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
             sdf.format(today);
             txtPO_date.setDate(today);
