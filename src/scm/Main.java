@@ -1,18 +1,22 @@
 package scm;
 
-import scm.utils.Permission;
-import scm.utils.systemTray;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import scm.accountCenter.new_account;
+import scm.database.DBControl;
 import scm.fas.entry_details;
 import scm.fas.fas_reports;
 import scm.fas.new_fas;
@@ -31,6 +35,8 @@ import scm.purchaseOrder.*;
 import scm.stock.*;
 import scm.supplier.new_supplier;
 import scm.supplier.supplier_list;
+import scm.utils.Permission;
+import scm.utils.systemTray;
 
 public class Main extends JFrame {
 
@@ -51,7 +57,6 @@ public class Main extends JFrame {
     //PO
     public static new_po po = new new_po();
     public static view_po pv = new view_po();
-    public static edit_po pe = new edit_po();
     public po_list pl = new po_list();
     public static new_po_delivery_term pd = new new_po_delivery_term();
     public static new_po_payment_term pp = new new_po_payment_term();
@@ -105,7 +110,6 @@ public class Main extends JFrame {
         jDesktopPane1.add(nf);
         jDesktopPane1.add(po);
         jDesktopPane1.add(pv);
-        jDesktopPane1.add(pe);
         jDesktopPane1.add(ng);
         jDesktopPane1.add(gr);
         jDesktopPane1.add(ni);
@@ -149,6 +153,12 @@ public class Main extends JFrame {
         new systemTray().setJframe(this);
         SystemTray.getTrayicon().displayMessage("Welcome to WMS " + lblUser.getText(), "Warehouse Management System for RR Constructions (Pvt) Ltd. ", MessageType.NONE);
 
+        ////
+        ///
+        //      WMSLobby   //
+        refreshLobby();
+        ///
+        ////
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +166,20 @@ public class Main extends JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel11 = new javax.swing.JLabel();
+        WMSLobby = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLatestPO = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblLatestFAS = new javax.swing.JTable();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        lblWinner1 = new javax.swing.JLabel();
+        lblWinner2 = new javax.swing.JLabel();
+        lblWinner3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -230,25 +253,114 @@ public class Main extends JFrame {
     setResizable(false);
     getContentPane().setLayout(null);
 
-    jLabel11.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
-    jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-    jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabel11.setText("www.anuradhawishmantha.com");
-    jDesktopPane1.add(jLabel11);
-    jLabel11.setBounds(700, 510, 290, 20);
+    WMSLobby.setBackground(new java.awt.Color(204, 204, 255));
+    WMSLobby.setOpaque(false);
+    WMSLobby.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+    jLabel1.setText("Latest FAS Updates");
+    WMSLobby.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 110, -1));
+
+    tblLatestPO.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "PO No", "Supplier", "Project", "Total"
+        }
+    ) {
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false
+        };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    jScrollPane1.setViewportView(tblLatestPO);
+    if (tblLatestPO.getColumnModel().getColumnCount() > 0) {
+        tblLatestPO.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblLatestPO.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tblLatestPO.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tblLatestPO.getColumnModel().getColumn(3).setPreferredWidth(40);
+    }
+
+    WMSLobby.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 580, 110));
+
+    jLabel2.setText("Latest Purchase Orders");
+    WMSLobby.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+
+    tblLatestFAS.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "Equip No", "Class", "Make", "By", "Time"
+        }
+    ));
+    tblLatestFAS.getTableHeader().setReorderingAllowed(false);
+    tblLatestFAS.setVerifyInputWhenFocusTarget(false);
+    jScrollPane3.setViewportView(tblLatestFAS);
+    if (tblLatestFAS.getColumnModel().getColumnCount() > 0) {
+        tblLatestFAS.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblLatestFAS.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblLatestFAS.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tblLatestFAS.getColumnModel().getColumn(3).setPreferredWidth(40);
+        tblLatestFAS.getColumnModel().getColumn(4).setPreferredWidth(120);
+    }
+
+    WMSLobby.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 580, 190));
+
+    lblWinner1.setFont(new java.awt.Font("Calibri", 3, 14)); // NOI18N
+    lblWinner1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    lblWinner1.setText("Winner 1");
+    jLayeredPane1.add(lblWinner1);
+    lblWinner1.setBounds(84, 207, 80, 20);
+
+    lblWinner2.setFont(new java.awt.Font("Calibri", 3, 14)); // NOI18N
+    lblWinner2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    lblWinner2.setText("Winner 2");
+    jLayeredPane1.add(lblWinner2);
+    lblWinner2.setBounds(4, 224, 80, 20);
+
+    lblWinner3.setFont(new java.awt.Font("Calibri", 3, 14)); // NOI18N
+    lblWinner3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    lblWinner3.setText("Winner 3");
+    jLayeredPane1.add(lblWinner3);
+    lblWinner3.setBounds(164, 230, 70, 17);
+
+    jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/WMSLobby_Winner.png"))); // NOI18N
+    jLabel10.setText("jLabel10");
+    jLayeredPane1.add(jLabel10);
+    jLabel10.setBounds(0, 9, 240, 241);
+
+    WMSLobby.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 250, 250));
+
+    jButton1.setText("Refresh");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
+    WMSLobby.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
+
+    jLabel5.setText("Monthly FAS Updates");
+    WMSLobby.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 140, -1));
+
+    jDesktopPane1.add(WMSLobby);
+    WMSLobby.setBounds(0, 0, 1030, 540);
 
     jLabel4.setFont(new java.awt.Font("Microsoft YaHei", 0, 14)); // NOI18N
     jLabel4.setForeground(new java.awt.Color(51, 51, 51));
     jLabel4.setText("Anuradha Wishmantha Software Solutions");
     jDesktopPane1.add(jLabel4);
-    jLabel4.setBounds(700, 490, 290, 20);
+    jLabel4.setBounds(700, 60, 290, 30);
 
-    jLabel12.setForeground(new java.awt.Color(102, 102, 102));
+    jLabel12.setForeground(new java.awt.Color(51, 51, 51));
     jLabel12.setText("Developed and Maintained by ");
     jDesktopPane1.add(jLabel12);
-    jLabel12.setBounds(770, 470, 160, 20);
+    jLabel12.setBounds(720, 40, 210, 20);
 
-    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/WMS_Background.jpg"))); // NOI18N
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/WMS_Background2.png"))); // NOI18N
     jDesktopPane1.add(jLabel3);
     jLabel3.setBounds(0, -20, 1050, 560);
 
@@ -970,6 +1082,10 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         //   keepChecking();
     }//GEN-LAST:event_lblServerIndicatorMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        refreshLobby();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -986,12 +1102,18 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JScrollPane ScrollPaneMessageBox;
+    public static javax.swing.JPanel WMSLobby;
     public static javax.swing.JTextPane info;
+    public static javax.swing.JButton jButton1;
     public static javax.swing.JDesktopPane jDesktopPane1;
-    public static javax.swing.JLabel jLabel11;
+    public static javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel12;
+    public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;
     public static javax.swing.JLabel jLabel4;
+    public static javax.swing.JLabel jLabel5;
+    public static javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JMenu jMenu1;
     public static javax.swing.JMenu jMenu2;
     public static javax.swing.JMenu jMenu3;
@@ -1004,6 +1126,8 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public static javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JMenuItem jMenuItem7;
     public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JPopupMenu.Separator jSeparator1;
     public static javax.swing.JPopupMenu.Separator jSeparator10;
     public static javax.swing.JPopupMenu.Separator jSeparator12;
@@ -1026,6 +1150,9 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public static javax.swing.JLabel lblServerIndicator;
     public static javax.swing.JLabel lblSilverBottomBackgroun;
     public static javax.swing.JLabel lblUser;
+    public static javax.swing.JLabel lblWinner1;
+    public static javax.swing.JLabel lblWinner2;
+    public static javax.swing.JLabel lblWinner3;
     public static javax.swing.JMenuItem mAbout;
     public static javax.swing.JMenuItem mExit;
     public static javax.swing.JMenuItem mFAS;
@@ -1051,6 +1178,8 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public static javax.swing.JMenuItem mSupplierList;
     public static javax.swing.JMenuItem mSupplierStockHistory;
     public static javax.swing.JMenuItem mUserAccounts;
+    public static javax.swing.JTable tblLatestFAS;
+    public static javax.swing.JTable tblLatestPO;
     // End of variables declaration//GEN-END:variables
 
     public static void keepChangingServerStatusLabel() {
@@ -1086,7 +1215,7 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
         ).start();
     }
-        //    @Override
+    //    @Override
     //    public void actionPerformed(ActionEvent e) {
     //        String oldText = ex.getText();
     //        String newText = oldText.substring(1) + oldText.substring(0, 1);
@@ -1113,5 +1242,73 @@ private void mRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Main.info.setVisible(true);
         Main.info.setText(ex + "\n <<--Click here to dismiss-->>.");
         Main.info.setForeground(Color.GREEN);
+    }
+
+    private void loadLatestPO() {
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            ResultSet rs = DBControl.getResultFromLocalDB("SELECT p.po_no, sd.supplier_name, "
+                    + "p.project_details, p.total FROM po p, supplier_details sd "
+                    + "WHERE p.supplier_no = sd.supplier_no  ORDER BY p.po_no DESC LIMIT 5 ");
+            DefaultTableModel dtm = (DefaultTableModel) tblLatestPO.getModel();
+            dtm.setRowCount(0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getInt("po_no"));
+                // v.add(rs.getString("po_date"));
+                v.add(rs.getString("supplier_name"));
+                v.add(rs.getString("project_details"));
+                v.add(rs.getBigDecimal("total"));
+                dtm.addRow(v);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void loadLatestFASUpdate() {
+        try {
+            ResultSet rs = DBControl.getResultFromLocalDB("SELECT * FROM fas_details ORDER BY updated DESC LIMIT 10");
+            DefaultTableModel dtm = (DefaultTableModel) tblLatestFAS.getModel();
+            dtm.setRowCount(0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("equipment_no"));
+                v.add(rs.getString("class_vehicle"));
+                v.add(rs.getString("machine_model"));
+                v.add(rs.getString("updated_by"));
+                v.add(rs.getString("updated"));
+                dtm.addRow(v);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void loadFASWinners() {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        try {
+            ResultSet rs = DBControl.getResultFromLocalDB("SELECT  updated_by, COUNT(*) AS user_count FROM fas_details "
+                    + "WHERE updated_by <> 'Admin' AND updated >= DATE_SUB( CURDATE(), INTERVAL 1 MONTH ) GROUP BY updated_by ORDER BY user_count DESC LIMIT 4");
+            while (rs.next()) {
+                arrayList.add(rs.getString("updated_by") + " - " + rs.getString("user_count"));
+                //   lblWinner1.setText(rs.getString);
+            }
+            //  for (String listValues : arrayList) {
+            lblWinner1.setText(arrayList.get(0));
+            lblWinner2.setText(arrayList.get(1));
+            lblWinner3.setText(arrayList.get(2));
+            //  }
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void refreshLobby() {
+        loadLatestPO();
+        loadLatestFASUpdate();
+        loadFASWinners();
     }
 }

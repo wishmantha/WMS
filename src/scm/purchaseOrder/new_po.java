@@ -664,7 +664,7 @@ public final class new_po extends javax.swing.JInternalFrame {
 
         comboVAT.setEditable(true);
         comboVAT.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboVAT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12", "0" }));
+        comboVAT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11", "0" }));
         getContentPane().add(comboVAT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 50, 20));
 
         lblVATPercentage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -961,7 +961,7 @@ public final class new_po extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Purchase Order doesn't exist. \nPlease enter a valid Purchase Order Number to EDIT", "Error: Cannot Edit Purchase Order", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(edit_po.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(new_po.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

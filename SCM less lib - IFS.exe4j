@@ -8,7 +8,7 @@
   </application>
   <executable name="Warehouse Management System" type="2" iconSet="true" iconFile="C:/Users/anuwlk/Documents/NetBeansProjects/WMS/src/images/scm icon 2.ico" executableDir="." redirectStderr="true" stderrFile="${USERPROFILE} error.log" stderrMode="append" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="highestAvailable" checkConsoleParameter="false" globalSingleInstance="false" amd64="false">
     <messageSet />
-    <versionInfo include="true" fileVersion="" fileDescription="Warehouse Management System" legalCopyright="" internalName="WMS" productName="" companyName="WISHMANTHA Software Solutions" productVersion="2.14.12.03" />
+    <versionInfo include="true" fileVersion="" fileDescription="Warehouse Management System" legalCopyright="" internalName="WMS" productName="" companyName="WISHMANTHA Software Solutions" productVersion="2.15.1.15" />
   </executable>
   <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="380" height="271" bitmapFile="C:/Users/anuwlk/Documents/NetBeansProjects/WMS/src/images/scm splash.png" java6SplashScreen="false">
     <text>

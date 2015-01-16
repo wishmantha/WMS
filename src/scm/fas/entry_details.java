@@ -210,7 +210,7 @@ public final class entry_details extends javax.swing.JInternalFrame {
 
     void update() {
         try {
-            ResultSet rs = DBControl.getResultFromLocalDB("SELECT * FROM fas_details ORDER BY updated ASC");
+            ResultSet rs = DBControl.getResultFromLocalDB("SELECT * FROM fas_details ORDER BY updated DESC");
             DefaultTableModel dtm = (DefaultTableModel) tblUpdated.getModel();
             dtm.setRowCount(0);
             while (rs.next()) {
