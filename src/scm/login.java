@@ -202,7 +202,7 @@ private void txtPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private void loginAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAdminActionPerformed
         if (clicked == false) {
             txtUN.setText("Admin");
-            txtPW.setText("anuradha12");
+            txtPW.setText("vihanga123");
             loginWithConnection();
         }
     }//GEN-LAST:event_loginAdminActionPerformed
