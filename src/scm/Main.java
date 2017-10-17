@@ -151,7 +151,7 @@ public class Main extends JFrame {
 
         //System Tray Notifications
         new systemTray().setJframe(this);
-        SystemTray.getTrayicon().displayMessage("Welcome to WMS " + lblUser.getText(), "Warehouse Management System for RR Constructions (Pvt) Ltd. ", MessageType.NONE);
+        SystemTray.getTrayicon().displayMessage("Welcome to Vihanga's " + lblUser.getText(), "Warehouse Management System for RR Constructions (Pvt) Ltd. ", MessageType.NONE);
 
         ////
         ///
